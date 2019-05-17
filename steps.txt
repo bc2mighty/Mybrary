@@ -1,0 +1,11 @@
+//Init NPM
+npm init -y
+
+//Install express and ejs with layouts for html files
+npm i express ejs express-ejs-layouts
+
+//Install nodemon for automatic changes on the server
+npm i --save-dev nodemon
+
+//Using env
+npm i --save-dev dotenv
