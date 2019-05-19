@@ -9,3 +9,27 @@ npm i --save-dev nodemon
 
 //Using env
 npm i --save-dev dotenv
+
+//Using multer
+npm i multer
+
+//Usage Of Mongo DB
+https://mongoosejs.com/docs/guide.html
+https://docs.mongodb.com/manual/data-modeling/
+https://docs.mongodb.com/manual/core/schema-validation/
+
+//Steps to push to heroku, check the docs for better understanding...
+git init
+git add .
+
+create repository
+copy and paste the origin command
+
+git commit -m "Message"
+
+git push
+
+heroku login
+heroku push
+
+git push heroku master
