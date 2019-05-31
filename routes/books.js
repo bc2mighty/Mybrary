@@ -17,7 +17,7 @@ const upload = multer({
 
 router.get("/", async(req, res) => {
     let query = Book.find();
-
+    
     if(req.query.title != null && req.query.title != ""){
         query = query.regex("title", new RegExp(req.query.title, "i"));
     }
@@ -45,7 +45,7 @@ router.get("/new", async(req, res) => {
     renderNewPage(res, new Book());
 });
 
-router.post("/",upload.single("coverImageName") ,async(req, res) => {
+router.post("/", upload.single('coverImageName'), async(req, res) => {
     const fileName = req.file != null ? req.file.filename : null;
     const book = new Book({
         title: req.body.title,
@@ -56,10 +56,12 @@ router.post("/",upload.single("coverImageName") ,async(req, res) => {
         coverImageName: fileName
     });
 
+    // saveBook(book, req.body.coverImageName);
+
     try{
         // const newBook = await book.save((err, book) => {
-            //Remember to use err for getting validation errors
-            // if (err) return res.json(err);
+        //     // Remember to use err for getting validation errors
+        //     if (err) return res.json(err);
         // });
 
         const newBook = await book.save({});
@@ -73,6 +75,15 @@ router.post("/",upload.single("coverImageName") ,async(req, res) => {
         renderNewPage(res, new Book(), true);
     }
 });
+
+function saveBook(book, coverEncoded){
+    if(coverEncoded == null) return;
+    const cover = JSON.parse(coverEncoded);
+    if(cover != null && imageMimeTypes.includes(cover.type)){
+        book.coverImage = Buffer.from(cover.data, "base64");
+        book.coverImageType = cover.type;
+    }
+}
 
 function removeBookCover(fileName){
     fs.unlink(path.join(uploadPath, fileName), err => {

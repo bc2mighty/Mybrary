@@ -27,12 +27,26 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // coverImage:{
+    //     type: Buffer,
+    //     required: true
+    // },
+    // coverImageType:{
+    //     type: String,
+    //     required: true
+    // },
     author:{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Author'
     }
 });
+
+// bookSchema.virtual("coverImagePath").get(function(){
+//     if(this.coverImageName != null && this.coverImageType != null){
+//         return `data:${this.coverImageType};charset=utf-8;`
+//     }
+// });
 
 bookSchema.virtual("coverImagePath").get(function(){
     if(this.coverImageName != null){
