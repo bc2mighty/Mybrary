@@ -18,6 +18,6 @@ authorSchema.pre("remove",function(next){
         }else{
             next();
         }
-    })
-})
+    });
+});
 module.exports = mongoose.model("Author", authorSchema);
